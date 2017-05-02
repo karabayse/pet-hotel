@@ -1,0 +1,22 @@
+CREATE TABLE pets (
+ID SERIAL PRIMARY KEY,
+pet VARCHAR(200), breed VARCHAR(60), color VARCHAR(50), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE owner (
+id SERIAL PRIMARY KEY,
+ownerfirstname VARCHAR(200),
+ownerlastname VARCHAR(200)
+);
+
+CREATE TABLE petownerid (
+id SERIAL PRIMARY KEY,
+petid INT REFERENCES pets(id),
+ownerid INT REFERENCES owner(id)
+);
+
+CREATE TABLE visits (
+id SERIAL PRIMARY KEY,
+visits INT REFERENCES pets(id),
+ownerid INT REFERENCES owner(id)
+);

@@ -8,7 +8,7 @@ var pg = require('pg');
 
 // setup config for the pool
 var config = {
-  database: 'pethotel',
+  database: 'pethotelrefactor',
   host: 'localhost',
   port: 5432,
   max: 20
@@ -39,7 +39,7 @@ app.post('/addClient', function(req, res){
         console.log('connected');
         res.send(clientObject);
       }
-      connection.query("INSERT into hotel (firstname, lastname ) values ($1, $2)", [req.body.firstName, req.body.lastName]);
+      connection.query("INSERT into owner (ownerfirstname, ownerlastname ) values ($1, $2)", [req.body.firstName, req.body.lastName]);
       done();
     });
   });
@@ -55,7 +55,7 @@ app.post('/addClient', function(req, res){
           console.log('connected');
           res.send(petObject);
         }
-        connection.query("INSERT into hotel (pet, breed, color) values ($1, $2, $3)", [req.body.petName, req.body.petBreed, req.body.petColor]);
+        connection.query("INSERT into pets (pet, breed, color) values ($1, $2, $3)", [req.body.petName, req.body.petBreed, req.body.petColor]);
         done();
       });
     });
@@ -68,7 +68,7 @@ app.get('/getClients', function(req, res){
       res.send(400);
     } else {
       console.log('connected get clients');
-      var resultSet = connection.query("SELECT firstname, lastname FROM hotel");
+      var resultSet = connection.query("SELECT * FROM owner");
       resultSet.on('row', function (row) {
         console.log('are you running?', row);
         allClients.push(row);

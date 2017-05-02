@@ -3,7 +3,7 @@
 $(document).ready(onReady);
 
 function onReady(){
-
+sendClient();
 // add event listeners
 $('#register').on('click', registerClient);
 $('#addPet').on('click', registerPet);
@@ -54,7 +54,7 @@ function sendClient(){
     success: function(response){
       console.log('getting clients', response);
       for (var i = 0; i < response.length; i++) {
-        $('.savedOwners').append('<option>' + response[i].firstname + " " + response[i].lastname + '</option>');
+        $('.savedOwners').append('<option data-ownerid="' + response[i].id + '">' + response[i].ownerfirstname + " " + response[i].ownerlastname + '</option>');
       }
     }
   });
